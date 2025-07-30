@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Resultados da Busca - Imob360{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Resultados da Busca</h1>
+        {% if query %}
+            <p class="section-subtitle">Resultados para: "{{ query }}"</p>
+        {% endif %}
+        
+        <!-- Resultados -->
+        {% if properties %}
+            <div class="properties-grid">
+                {% for property in properties %}
+                    <div class="property-card">
+                        <a href="{% url 'property_detail' property.id %}">
+                            {% if property.image %}
+                                <img src="{{ property.image.url }}" alt="{{ property.title }}" class="property-image">
+                            {% else %}
+                                <img src="https://i.pinimg.com/originals/e3/ed/ce/e3edcecd937791c25eef1ad528f69ca6.webp" alt="{{ property.title }}" class="property-image">
+                            {% endif %}
+                            <div class="property-info">
+                                <div class="property-price">{{ property.get_price_display }}</div>
+                                <div class="property-title">{{ property.title }}</div>
+                                <div class="property-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ property.address }}, {{ property.city }}, {{ property.state }}
+                                </div>
+                                <div class="property-details">
+                                    <span><i class="fas fa-bed"></i> {{ property.bedrooms }} quarto{{ property.bedrooms|pluralize }}</span>
+                                    <span><i class="fas fa-bath"></i> {{ property.bathrooms }} banheiro{{ property.bathrooms|pluralize }}</span>
+                                    <span><i class="fas fa-ruler-combined"></i> {{ property.area }} m²</span>
+                                    {% if property.parking_spaces > 0 %}
+                                        <span><i class="fas fa-car"></i> {{ property.parking_spaces }} vaga{{ property.parking_spaces|pluralize }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>Nenhuma propriedade encontrada para sua busca.</p>
+                {% if query %}
+                    <p>Tente buscar por outros termos ou usar filtros diferentes.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

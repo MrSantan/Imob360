@@ -1,0 +1,63 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Loteamentos e Terrenos - Imob360{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Loteamentos e Terrenos</h1>
+        <p class="section-subtitle">Encontre o terreno ideal para construir seus sonhos</p>
+        
+        <!-- Filtros -->
+        <div class="search-bar">
+            <form method="GET" class="search-form">
+                <input type="text" name="city" placeholder="Cidade..." value="{{ request.GET.city }}">
+                <input type="number" name="min_price" placeholder="Preço mín." value="{{ request.GET.min_price }}">
+                <input type="number" name="max_price" placeholder="Preço máx." value="{{ request.GET.max_price }}">
+                <input type="number" name="min_area" placeholder="Área mín. (m²)" value="{{ request.GET.min_area }}">
+                <input type="number" name="max_area" placeholder="Área máx. (m²)" value="{{ request.GET.max_area }}">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-filter"></i> Filtrar
+                </button>
+            </form>
+        </div>
+        
+        <!-- Resultados -->
+        {% if properties %}
+            <div class="properties-grid">
+                {% for property in properties %}
+                    <div class="property-card">
+                        <a href="{% url 'property_detail' property.id %}">
+                            {% if property.image %}
+                                <img src="{{ property.image.url }}" alt="{{ property.title }}" class="property-image">
+                            {% else %}
+                                <img src="https://i.pinimg.com/originals/df/c1/35/dfc13529588328cfd78dadcefc93bd30.jpg" alt="{{ property.title }}" class="property-image">
+                            {% endif %}
+                            <div class="property-info">
+                                <div class="property-price">{{ property.get_price_display }}</div>
+                                <div class="property-title">{{ property.title }}</div>
+                                <div class="property-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ property.address }}, {{ property.city }}, {{ property.state }}
+                                </div>
+                                <div class="property-details">
+                                    <span><i class="fas fa-ruler-combined"></i> {{ property.area }} m²</span>
+                                    <span><i class="fas fa-map"></i> {{ property.get_property_type_display }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-map"></i>
+                <p>Nenhum loteamento ou terreno encontrado.</p>
+                <p>Tente ajustar os filtros para ver mais resultados.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

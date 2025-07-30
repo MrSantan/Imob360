@@ -1,0 +1,131 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Imob360 - Encontre a casa dos seus sonhos{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Encontre a casa dos seus sonhos</h1>
+        <p>A maior plataforma de imóveis do Brasil. Compre, venda ou alugue com facilidade.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Propriedades em Destaque</h2>
+        <p class="section-subtitle">Descubra as melhores opções selecionadas para você</p>
+        
+        {% if featured_properties %}
+            <div class="properties-grid">
+                {% for property in featured_properties %}
+                    <div class="property-card">
+                        <a href="{% url 'property_detail' property.id %}">
+                            {% if property.image %}
+                                <img src="{{ property.image.url }}" alt="{{ property.title }}" class="property-image">
+                            {% else %}
+                                <img src="https://i.pinimg.com/originals/85/bf/6a/85bf6a1c688cb32b33c2dc4b6a77e16a.jpg" alt="{{ property.title }}" class="property-image">
+                            {% endif %}
+                            <div class="property-info">
+                                <div class="property-price">{{ property.get_price_display }}</div>
+                                <div class="property-title">{{ property.title }}</div>
+                                <div class="property-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ property.address }}, {{ property.city }}, {{ property.state }}
+                                </div>
+                                <div class="property-details">
+                                    <span><i class="fas fa-bed"></i> {{ property.bedrooms }} quarto{{ property.bedrooms|pluralize }}</span>
+                                    <span><i class="fas fa-bath"></i> {{ property.bathrooms }} banheiro{{ property.bathrooms|pluralize }}</span>
+                                    <span><i class="fas fa-ruler-combined"></i> {{ property.area }} m²</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-home"></i>
+                <p>Nenhuma propriedade em destaque encontrada.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section" style="background-color: white;">
+    <div class="container">
+        <h2 class="section-title">Propriedades Recentes</h2>
+        <p class="section-subtitle">Veja os imóveis mais recentes adicionados à nossa plataforma</p>
+        
+        {% if recent_properties %}
+            <div class="properties-grid">
+                {% for property in recent_properties %}
+                    <div class="property-card">
+                        <a href="{% url 'property_detail' property.id %}">
+                            {% if property.image %}
+                                <img src="{{ property.image.url }}" alt="{{ property.title }}" class="property-image">
+                            {% else %}
+                                <img src="https://i.pinimg.com/originals/0e/1c/f5/0e1cf5c149008f1ee3be0205c410ff72.jpg" alt="{{ property.title }}" class="property-image">
+                            {% endif %}
+                            <div class="property-info">
+                                <div class="property-price">{{ property.get_price_display }}</div>
+                                <div class="property-title">{{ property.title }}</div>
+                                <div class="property-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ property.address }}, {{ property.city }}, {{ property.state }}
+                                </div>
+                                <div class="property-details">
+                                    <span><i class="fas fa-bed"></i> {{ property.bedrooms }} quarto{{ property.bedrooms|pluralize }}</span>
+                                    <span><i class="fas fa-bath"></i> {{ property.bathrooms }} banheiro{{ property.bathrooms|pluralize }}</span>
+                                    <span><i class="fas fa-ruler-combined"></i> {{ property.area }} m²</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-home"></i>
+                <p>Nenhuma propriedade recente encontrada.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">O que você deseja fazer?</h2>
+        <div class="properties-grid">
+            <div class="property-card">
+                <a href="{% url 'buy_properties' %}">
+                    <img src="https://i.pinimg.com/originals/4c/64/ac/4c64ac9b8251abcd912a535eff23a96c.jpg" alt="Comprar" class="property-image">
+                    <div class="property-info">
+                        <div class="property-title">Comprar Imóvel</div>
+                        <p>Encontre a casa perfeita para você e sua família</p>
+                    </div>
+                </a>
+            </div>
+            <div class="property-card">
+                <a href="{% url 'rent_properties' %}">
+                    <img src="http://www.remcommercial.com/wp-content/uploads/2020/03/shutterstock_404825329.jpg" alt="Alugar" class="property-image">
+                    <div class="property-info">
+                        <div class="property-title">Alugar Imóvel</div>
+                        <p>Descubra opções de aluguel que cabem no seu orçamento</p>
+                    </div>
+                </a>
+            </div>
+            <div class="property-card">
+                <a href="{% url 'sell_property' %}">
+                    <img src="https://i.pinimg.com/originals/cc/84/ea/cc84ea9c22a1dc84a78c5069626a9769.jpg" alt="Vender" class="property-image">
+                    <div class="property-info">
+                        <div class="property-title">Vender Imóvel</div>
+                        <p>Anuncie seu imóvel e encontre compradores qualificados</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

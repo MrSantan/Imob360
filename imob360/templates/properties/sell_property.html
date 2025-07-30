@@ -1,0 +1,95 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Vender Imóvel - Imob360{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Vender seu Imóvel</h1>
+        <p class="section-subtitle">Anuncie seu imóvel e encontre compradores qualificados</p>
+        
+        <div class="form-container">
+            <div class="property-detail">
+                <img src="https://i.pinimg.com/originals/d0/0a/2a/d00a2a5c08113ff0270d62c9f4808b99.jpg" alt="Vender Imóvel" style="margin-bottom: 2rem;">
+                
+                <h2>Como funciona?</h2>
+                <div class="property-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-camera"></i>
+                        <div class="spec-value">1</div>
+                        <div class="spec-label">Tire fotos</div>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-edit"></i>
+                        <div class="spec-value">2</div>
+                        <div class="spec-label">Descreva o imóvel</div>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <div class="spec-value">3</div>
+                        <div class="spec-label">Defina o preço</div>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-rocket"></i>
+                        <div class="spec-value">4</div>
+                        <div class="spec-label">Publique</div>
+                    </div>
+                </div>
+                
+                <h3>Benefícios de vender conosco</h3>
+                <ul style="margin: 2rem 0;">
+                    <li>✓ Alcance milhares de compradores potenciais</li>
+                    <li>✓ Ferramentas avançadas de marketing</li>
+                    <li>✓ Suporte especializado em vendas</li>
+                    <li>✓ Análise de mercado personalizada</li>
+                    <li>✓ Negociação segura e transparente</li>
+                </ul>
+                
+                <h3>Entre em contato</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Nome completo:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="property_address">Endereço do imóvel:</label>
+                        <input type="text" id="property_address" name="property_address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="property_type">Tipo de imóvel:</label>
+                        <select id="property_type" name="property_type" required>
+                            <option value="">Selecione...</option>
+                            <option value="house">Casa</option>
+                            <option value="apartment">Apartamento</option>
+                            <option value="condo">Condomínio</option>
+                            <option value="townhouse">Sobrado</option>
+                            <option value="lot">Terreno</option>
+                            <option value="commercial">Comercial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expected_price">Preço esperado:</label>
+                        <input type="number" id="expected_price" name="expected_price" placeholder="R$ 0,00">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem adicional:</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Conte-nos mais sobre seu imóvel..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Solicitar Avaliação</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

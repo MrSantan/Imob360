@@ -1,0 +1,91 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ajuda - Imob360{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="section-title">Central de Ajuda</h1>
+        <p class="section-subtitle">Encontre respostas para suas dúvidas</p>
+        
+        <div class="properties-grid">
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><i class="fas fa-home"></i> Como comprar um imóvel?</h3>
+                    <p>Guia completo para comprar sua primeira casa ou apartamento.</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><i class="fas fa-key"></i> Como alugar um imóvel?</h3>
+                    <p>Dicas e processos para encontrar e alugar o imóvel ideal.</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><i class="fas fa-dollar-sign"></i> Como vender um imóvel?</h3>
+                    <p>Estratégias para vender seu imóvel pelo melhor preço.</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><i class="fas fa-search"></i> Como usar os filtros?</h3>
+                    <p>Aprenda a usar os filtros para encontrar exatamente o que procura.</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><i class="fas fa-shield-alt"></i> Segurança nas transações</h3>
+                    <p>Dicas importantes para transações seguras e protegidas.</p>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><i class="fas fa-phone"></i> Contato</h3>
+                    <p>Entre em contato conosco para suporte especializado.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <h2>Não encontrou o que procura?</h2>
+            <p>Entre em contato conosco e nossa equipe te ajudará!</p>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Assunto:</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Selecione...</option>
+                        <option value="duvida-compra">Dúvida sobre compra</option>
+                        <option value="duvida-aluguel">Dúvida sobre aluguel</option>
+                        <option value="duvida-venda">Dúvida sobre venda</option>
+                        <option value="problema-tecnico">Problema técnico</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Descreva sua dúvida ou problema..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

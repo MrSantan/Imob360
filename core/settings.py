@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'imob360',
     'inquiries',
     'properties',
-    'users'
+    'users',
+    'clientes',  # Adicionando o app clientes
 
 
 ]
